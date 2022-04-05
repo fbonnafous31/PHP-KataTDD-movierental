@@ -1,7 +1,7 @@
 <?php
 namespace App;
 
-class ChildrenMovie extends Movie {
+class RegularMovie extends Movie {
 
     public function __construct($title, $priceCode)
     {
@@ -9,10 +9,10 @@ class ChildrenMovie extends Movie {
     }
 
     public function getAmount(int $daysRented) {
-        if ($daysRented > 3) {
-            return 1.5 + ($daysRented - 3) * 1.5;
+        if ($daysRented > 2) {
+            return 2 + ($daysRented - 2) * 1.5;
         }
-        return 1.5;
+        return 2;
     }
 
     public function getRenterPoint() {

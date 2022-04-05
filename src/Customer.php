@@ -23,30 +23,13 @@ class Customer
         $result = "Rental Record for " . $this->getName() . "\n";
 
         foreach ($this->_rentals as $each) {
-            $thisAmount = 0;
-            $movie      = $each->getMovie()->getPriceCode(); 
-            $dayRented  = $each->getDaysRented();
+            $thisAmount = $each->getMovie()->getAmount($each->getDaysRented());
+            $frequentRenterPoints += $each->getMovie()->getRenterPoint($each->getDaysRented());
 
-            //determine amounts for each line
-            if ( $movie == Movie::REGULAR) {
-                $thisAmount += 2;
-                $thisAmount += ($dayRented - 2) * 1.5;
-            } elseif ($movie == Movie::NEW_RELEASE) {
-                $thisAmount += $dayRented * 3;
-                if ($dayRented > 1) $frequentRenterPoints++;
-            }  elseif ($movie == Movie::CHILDRENS) {
-                $thisAmount = $each->getMovie()->getAmount($dayRented);
-            }
-            
-            // add frequent renter points
-            $frequentRenterPoints++;
-
-            // show figures for this rental
             $result .= sprintf("\t%s\t%1.1f\n", $each->getMovie()->getTitle(), $thisAmount);
             $totalAmount += $thisAmount;
         }
 
-        // add footer lines
         $result .= sprintf("Amount owed is %1.1f\n", $totalAmount);
         $result .= "You earned " . $frequentRenterPoints . " frequent renter points";
 
