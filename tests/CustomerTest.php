@@ -1,8 +1,6 @@
 <?php
 namespace App;
 
-require_once("Customer.php");
-
 use App\Customer;
 use PHPUnit\Framework\TestCase;
 
