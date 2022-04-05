@@ -1,8 +1,6 @@
 <?php
 namespace App;
 
-require_once("Movie.php");
-
 class Rental
 {
 

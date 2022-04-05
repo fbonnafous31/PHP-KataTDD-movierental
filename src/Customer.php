@@ -1,8 +1,6 @@
 <?php
 namespace App;
 
-require_once("Rental.php");
-
 class Customer
 {
 
@@ -26,18 +24,18 @@ class Customer
 
         foreach ($this->_rentals as $each) {
             $thisAmount = 0;
+            $movie      = $each->getMovie()->getPriceCode(); 
+            $dayRented  = $each->getDaysRented();
 
             //determine amounts for each line
-            if ( $each->getMovie()->getPriceCode() == Movie::REGULAR) {
+            if ( $movie == Movie::REGULAR) {
                 $thisAmount += 2;
-                $thisAmount += ($each->getDaysRented() - 2) * 1.5;
-
-            } elseif ($each->getMovie()->getPriceCode() == Movie::NEW_RELEASE) {
-                $thisAmount += $each->getDaysRented() * 3;
-                if ($each->getDaysRented() > 1) $frequentRenterPoints++;
-            }  elseif ($each->getMovie()->getPriceCode() == Movie::CHILDRENS) {
-                $thisAmount += 1.5;
-                $thisAmount += ($each->getDaysRented() - 3) * 1.5;
+                $thisAmount += ($dayRented - 2) * 1.5;
+            } elseif ($movie == Movie::NEW_RELEASE) {
+                $thisAmount += $dayRented * 3;
+                if ($dayRented > 1) $frequentRenterPoints++;
+            }  elseif ($movie == Movie::CHILDRENS) {
+                $thisAmount = $each->getMovie()->getAmount($dayRented);
             }
             
             // add frequent renter points
