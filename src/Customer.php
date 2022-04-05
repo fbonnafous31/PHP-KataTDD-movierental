@@ -26,24 +26,22 @@ class Customer
 
         foreach ($this->_rentals as $each) {
             $thisAmount = 0;
-            $moviePriceCode  = $each->getMovie()->getPriceCode();
 
             //determine amounts for each line
-            if ( $moviePriceCode == Movie::REGULAR) {
+            if ( $each->getMovie()->getPriceCode() == Movie::REGULAR) {
                 $thisAmount += 2;
-                if ($each->getDaysRented() > 2) $thisAmount += ($each->getDaysRented() - 2) * 1.5;
-            } elseif ($moviePriceCode == Movie::NEW_RELEASE) {
-                $thisAmount += $each->getDaysRented() * 3;
-            }  elseif ($moviePriceCode == Movie::CHILDRENS) {
-                $thisAmount += 1.5;
-                if ($each->getDaysRented() > 3) $thisAmount += ($each->getDaysRented() - 3) * 1.5;
-            }
+                $thisAmount += ($each->getDaysRented() - 2) * 1.5;
 
+            } elseif ($each->getMovie()->getPriceCode() == Movie::NEW_RELEASE) {
+                $thisAmount += $each->getDaysRented() * 3;
+                if ($each->getDaysRented() > 1) $frequentRenterPoints++;
+            }  elseif ($each->getMovie()->getPriceCode() == Movie::CHILDRENS) {
+                $thisAmount += 1.5;
+                $thisAmount += ($each->getDaysRented() - 3) * 1.5;
+            }
+            
             // add frequent renter points
             $frequentRenterPoints++;
-            // add bonus for a two day new release rental
-            if (($each->getMovie()->getPriceCode() == Movie::NEW_RELEASE) && $each->getDaysRented() > 1)
-                $frequentRenterPoints++;
 
             // show figures for this rental
             $result .= sprintf("\t%s\t%1.1f\n", $each->getMovie()->getTitle(), $thisAmount);
