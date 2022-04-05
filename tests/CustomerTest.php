@@ -9,12 +9,12 @@ class CustomerTest extends TestCase
     public function test()
     {
         $customer = new Customer("Bob");
-        $customer->addRental(new Rental(new RegularMovie("Jaws", Movie::REGULAR), 2));
-        $customer->addRental(new Rental(new RegularMovie("Golden Eye", Movie::REGULAR), 3));
-        $customer->addRental(new Rental(new NewRentalMovie("Short New", Movie::NEW_RELEASE), 1));
-        $customer->addRental(new Rental(new NewRentalMovie("Long New", Movie::NEW_RELEASE), 2));
-        $customer->addRental(new Rental(new ChildrenMovie("Bambi", Movie::CHILDRENS), 3));
-        $customer->addRental(new Rental(new ChildrenMovie("Toy Story", Movie::CHILDRENS), 4));
+        $customer->addRental(new Rental(new RegularMovie("Jaws"), 2));
+        $customer->addRental(new Rental(new RegularMovie("Golden Eye"), 3));
+        $customer->addRental(new Rental(new NewRentalMovie("Short New"), 1));
+        $customer->addRental(new Rental(new NewRentalMovie("Long New"), 2));
+        $customer->addRental(new Rental(new ChildrenMovie("Bambi"), 3));
+        $customer->addRental(new Rental(new ChildrenMovie("Toy Story"), 4));
 
         $expected = "" .
             "Rental Record for Bob\n" .

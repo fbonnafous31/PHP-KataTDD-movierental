@@ -3,9 +3,9 @@ namespace App;
 
 class NewRentalMovie extends Movie {
 
-    public function __construct($title, $priceCode)
+    public function __construct($title)
     {
-        parent::__construct($title, $priceCode);
+        parent::__construct($title);
     }
 
     public function getAmount(int $daysRented) {
