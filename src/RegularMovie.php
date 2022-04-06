@@ -15,7 +15,7 @@ class RegularMovie extends Movie {
         return 2;
     }
 
-    public function getRenterPoint() {
+    public function getRenterPoint(int $daysRented) {
         return 1;
     }
 

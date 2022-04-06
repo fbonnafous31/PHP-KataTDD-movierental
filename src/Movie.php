@@ -1,7 +1,7 @@
 <?php
 namespace App;
 
-class Movie
+abstract class Movie
 {
 
     public function __construct($title)
@@ -14,4 +14,6 @@ class Movie
         return $this->_title;
     }
 
+    abstract public function getAmount(int $daysRented);
+    abstract public function getRenterPoint(int $daysRented);
 }

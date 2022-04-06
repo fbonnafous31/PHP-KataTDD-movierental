@@ -19,19 +19,18 @@ class Customer
     public function statement()
     {
         $totalAmount = 0;
-        $frequentRenterPoints = 0;
+        $renterPoint = 0;
         $result = "Rental Record for " . $this->getName() . "\n";
 
         foreach ($this->_rentals as $each) {
-            $thisAmount = $each->getMovie()->getAmount($each->getDaysRented());
-            $frequentRenterPoints += $each->getMovie()->getRenterPoint($each->getDaysRented());
-
-            $result .= sprintf("\t%s\t%1.1f\n", $each->getMovie()->getTitle(), $thisAmount);
-            $totalAmount += $thisAmount;
+            $amount       = $each->getMovie()->getAmount($each->getDaysRented());
+            $renterPoint += $each->getMovie()->getRenterPoint($each->getDaysRented());
+            $result      .= sprintf("\t%s\t%1.1f\n", $each->getMovie()->getTitle(), $amount);
+            $totalAmount += $amount;
         }
 
         $result .= sprintf("Amount owed is %1.1f\n", $totalAmount);
-        $result .= "You earned " . $frequentRenterPoints . " frequent renter points";
+        $result .= "You earned " . $renterPoint . " frequent renter points";
 
         return $result;
 

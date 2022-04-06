@@ -15,7 +15,7 @@ class ChildrenMovie extends Movie {
         return 1.5;
     }
 
-    public function getRenterPoint() {
+    public function getRenterPoint(int $daysRented) {
         return 1;
     }
 
